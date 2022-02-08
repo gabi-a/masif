@@ -1,5 +1,3 @@
-Test change
-
 ![MaSIF banner and concept](https://raw.githubusercontent.com/LPDI-EPFL/masif/master/img/Concept-01.png)
 
 ## MaSIF- Molecular Surface Interaction Fingerprints: Geometric deep learning to decipher patterns in protein molecular surfaces.
