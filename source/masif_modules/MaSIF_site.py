@@ -148,7 +148,7 @@ class MaSIF_site:
 
     def __init__(
         self,
-        max_rho,
+        max_rho, # params["max_distance"]
         n_thetas=16,
         n_rhos=5,
         n_gamma=1.0,
