@@ -49,8 +49,24 @@ def train_masif_site(
     X_train, X_val, X_test = train_test_val_split(data_dirs, test_size=0.3, val_size=0.1)
 
     for pdbdir in X_train:
-        mydir = params["masif_precomputation_dir"] + pdbdir
+        # mydir = params["masif_precomputation_dir"] + pdbdir
         # pdbid, chains = pdbdir.split("_")
         
         rho_wrt_center = np.load(os.path.join(pdbdir, "rho_wrt_center.npy"))
         theta_wrt_center = np.load(os.path.join(pdbdir, "theta_wrt_center.npy"))
+        input_feat = np.load(os.path.join(pdbdir, "input_feat.npy"))
+        if np.sum(params["feat_mask"]) < 5:
+            input_feat = mask_input_feat(input_feat, params["feat_mask"])
+        
+        ## What is this??
+        ## Apears in guassian activations:
+        ## MaSIF_site.py line 103: gauss_activations = tf.multiply(gauss_activations, mask)
+        mask = np.load(os.path.join(pdbdir, "mask.npy"))
+        mask = np.expand_dims(mask, 2)
+        
+        labels = np.load(os.path.join(pdbdir, "conds.npy")) # ["PEG", "no PEG"]
+
+        # feed_dict = {
+        #     learning_obj.rho_coords: rho_wrt_center,
+        #     learning_obj.theta_coords: theta_wrt_center,
+        # }
